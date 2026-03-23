@@ -1,0 +1,102 @@
+{
+  "name": "Supratik Chakraborty",
+  "designation": "Software Engineer",
+  "company": "Trumio",
+  "summary": "Building AI-native enterprise SaaS platforms with a focus on admin governance, analytics, and compliance-first architectures, experienced in designing multi-tenant systems, RBAC, and Agentic AI automation pipelines.",
+  "imageUri": "/profile.png",
+  "resumeUri": "https://drive.google.com/file/d/1_Dsi8cvuOh_64THoCZx5GSZ_HmzI2i-j/view?usp=sharing",
+  "email": "supratikofficial1@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/supratikch/",
+  "github": "https://github.com/deagleSC",
+  "phone": "",
+  "contactMessage": "Open to conversations about full-stack engineering roles, AI-integrated product development, or tackling complex enterprise challenges together.",
+  "experience": [
+    {
+      "date": "Mar 2024 - Present",
+      "description": "Software Engineer",
+      "id": 1,
+      "title": "Trumio",
+      "points": [
+        "Architected multi-tenant admin backend with RBAC, license enforcement, and policy-driven workflows for 5 enterprise customers (500+ users); reduced manual onboarding steps by 75% via zero-touch configuration",
+        "Built authorization-aware analytics services with strict tenant isolation for managerial reporting; cut report generation time by 90%+ with zero compliance violations in production",
+        "Led development of AI-powered voice interview platform with VAPI integration, real-time transcription, and ML-powered proctoring using TensorFlow.js + MediaPipe; automated feedback generation and performance scoring",
+        "Designed analytics ingestion layer integrating Google Analytics and Hotjar with schema validation, rate limiting, and fault tolerance; increased trackable user events by 3x (8 to 25+) across platform surfaces",
+        "Orchestrated backend pipeline processing 200–300 PRs and feedback records monthly with PII masking and NDA boundaries; decreased weekly review time by 50% (6+ hours to under 3) while eliminating compliance risk",
+        "Owned backend delivery for 10+ production releases with bi-weekly deployments; improved observability and rollback readiness, reducing post-release hotfixes by 50% (3–4 to 1–2 per cycle)",
+        "Led frontend performance optimization using bundle splitting, render-path optimization, and memoization; improved Lighthouse performance scores by 26% (62 to 78) on key dashboard surfaces",
+        "Initiated 40+ component design system distributed as npm package; optimized average component development time by 50% (4+ hours to under 2) for internal teams"
+      ]
+    },
+    {
+      "date": "Oct 2023 - Mar 2024",
+      "description": "Founding Engineer (SDE-1)",
+      "id": 2,
+      "title": "Reunion",
+      "points": [
+        "Enhanced web scraping pipelines using BeautifulSoup to extract structured data from 20+ government real-estate portals; implemented distributed ingestion workflows with Celery + RabbitMQ processing 100+ records per run",
+        "Integrated Keycloak for secure RBAC and maintained scalable data pipelines supporting real-time property data aggregation across multiple government sources"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Chessvine",
+      "description": "Chess analysis product: AI game summaries, two practice puzzles per game, an interactive board, bulk PGN upload, and dashboards to review your play.",
+      "tags": ["Next.js", "Express", "MongoDB", "GCP", "Docker"],
+      "mediaKind": "image",
+      "mediaSrc": "/chessvine-dark.png",
+      "mediaPoster": null,
+      "live": "https://chessvine.vercel.app",
+      "github": null
+    },
+    {
+      "id": 2,
+      "title": "Hirevine",
+      "description": "Hiring software that reads resumes like a recruiter, scores fit to your job description, and runs live AI interviews with voice—so teams spend less time on admin and more time choosing the right people.",
+      "tags": ["Next.js", "Express", "PostgreSQL", "GCP", "Docker"],
+      "mediaKind": "image",
+      "mediaSrc": "/hirevine-dark.png",
+      "mediaPoster": null,
+      "live": "https://hirevine.vercel.app",
+      "github": null
+    }
+  ],
+  "skills": {
+    "languages": [
+      "Python",
+      "JavaScript",
+      "TypeScript",
+      "HTML/CSS",
+      "C++",
+      "SQL"
+    ],
+    "frameworks": [
+      "FastAPI",
+      "Node.js",
+      "Express",
+      "React",
+      "Next.js",
+      "Vite",
+      "Zustand",
+      "Redux"
+    ],
+    "tools": [
+      "Azure",
+      "Keycloak",
+      "GitHub Actions",
+      "Docker",
+      "Linux",
+      "Git",
+      "GitHub",
+      "LaTeX"
+    ]
+  },
+  "education": {
+    "institution": "West Bengal University of Technology",
+    "location": "Kolkata, India",
+    "degree": "B.Tech in Information Technology",
+    "cgpa": "9.11",
+    "period": "Jul 2019 - Aug 2023"
+  }
+}
