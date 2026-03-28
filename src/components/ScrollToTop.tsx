@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -9,6 +10,7 @@ const SHOW_AFTER_PX = 120;
 
 export default function ScrollToTop() {
   const [visible, setVisible] = useState(false);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => {
@@ -30,23 +32,34 @@ export default function ScrollToTop() {
   }, []);
 
   return (
-    <Button
-      type="button"
-      variant="default"
-      size="icon"
-      aria-label="Scroll to top"
-      aria-hidden={!visible}
-      tabIndex={visible ? 0 : -1}
-      onClick={goTop}
-      className={cn(
-        "fixed bottom-6 right-6 z-40 size-11 rounded-full shadow-md transition-all duration-200",
-        "hover:shadow-lg",
+    <motion.div
+      className="fixed bottom-6 right-6 z-40"
+      initial={false}
+      animate={
         visible
-          ? "pointer-events-auto translate-y-0 opacity-100"
-          : "pointer-events-none translate-y-2 opacity-0",
-      )}
+          ? { opacity: 1, y: 0, scale: 1 }
+          : { opacity: 0, y: 12, scale: reduce ? 1 : 0.92 }
+      }
+      transition={{
+        duration: reduce ? 0.15 : 0.28,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
-      <ChevronUp className="size-5" aria-hidden />
-    </Button>
+      <Button
+        type="button"
+        variant="default"
+        size="icon"
+        aria-label="Scroll to top"
+        aria-hidden={!visible}
+        tabIndex={visible ? 0 : -1}
+        onClick={goTop}
+        className={cn(
+          "size-11 rounded-full shadow-md transition-shadow duration-200 hover:shadow-lg",
+          visible ? "pointer-events-auto" : "pointer-events-none",
+        )}
+      >
+        <ChevronUp className="size-5" aria-hidden />
+      </Button>
+    </motion.div>
   );
 }

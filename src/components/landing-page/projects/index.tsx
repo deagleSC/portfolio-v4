@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { ExternalLink, Github } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { usePageReveal } from "@/components/PageRevealContext";
 import info from "@/data/info.json";
 
 type Project = (typeof info.projects)[number];
@@ -71,18 +75,64 @@ function ProjectMedia({ project }: { project: Project }) {
   );
 }
 
+const cardEase = [0.22, 1, 0.36, 1] as const;
+
 export default function Projects() {
+  const reduce = useReducedMotion();
+  const revealed = usePageReveal();
   const projects = info.projects;
   if (!projects?.length) return null;
 
+  const listVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: reduce ? 0 : 0.11,
+        delayChildren: reduce ? 0 : 0.07,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 22 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: reduce ? 0 : 0.48, ease: cardEase },
+    },
+  };
+
   return (
     <div className="flex flex-col gap-4 w-full">
-      <h2 className="text-2xl font-bold">Projects</h2>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full list-none p-0 m-0">
+      <motion.h2
+        className="text-2xl font-bold"
+        initial={{ opacity: 0, y: 14 }}
+        animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+        transition={{
+          duration: reduce ? 0 : 0.42,
+          delay: reduce ? 0 : 0.12,
+          ease: cardEase,
+        }}
+      >
+        Projects
+      </motion.h2>
+      <motion.ul
+        className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full list-none p-0 m-0"
+        variants={listVariants}
+        initial="hidden"
+        animate={revealed ? "visible" : "hidden"}
+      >
         {projects.map((project) => (
-          <li
+          <motion.li
             key={project.id}
-            className="flex flex-col overflow-hidden rounded-lg bg-accent/40 border border-border/60 transition-colors"
+            variants={cardVariants}
+            className="flex flex-col overflow-hidden rounded-lg bg-accent/40 border border-border/60 transition-colors duration-300 shadow-sm hover:shadow-md hover:border-primary/25"
+            whileHover={
+              reduce
+                ? undefined
+                : { y: -4, transition: { duration: 0.22, ease: cardEase } }
+            }
+            whileTap={reduce ? undefined : { scale: 0.997 }}
           >
             <ProjectMedia project={project} />
             <div className="flex flex-col gap-3 p-4 flex-1">
@@ -111,9 +161,9 @@ export default function Projects() {
                 <LinkSlot href={project.github} label="GitHub" icon={Github} />
               </div>
             </div>
-          </li>
+          </motion.li>
         ))}
-      </ul>
+      </motion.ul>
     </div>
   );
 }

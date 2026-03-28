@@ -1,7 +1,7 @@
 // For adding custom fonts with other frameworks, see:
 // https://tailwindcss.com/docs/font-family
 import type { Metadata } from "next";
-import { Antic, JetBrains_Mono, Playfair_Display } from "next/font/google";
+import { Antic } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { GoogleTagManager } from "@next/third-parties/google";
@@ -12,16 +12,6 @@ const fontSans = Antic({
   subsets: ["latin"],
   variable: "--font-sans",
   weight: "400",
-});
-
-const fontSerif = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-serif",
-});
-
-const fontMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
 });
 
 const metaTitleDefault = `${info.name} | Software Engineer`;
@@ -132,9 +122,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GOOGLE_TAG ?? ""} />
-      <body
-        className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} antialiased`}
-      >
+      <body className={`${fontSans.variable} antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

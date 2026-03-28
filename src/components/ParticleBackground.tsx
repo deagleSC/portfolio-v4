@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface Particle {
   id: number;
@@ -20,19 +20,20 @@ interface Particle {
 export default function ParticleBackground() {
   const [particles, setParticles] = useState<Particle[]>([]);
   const [mounted, setMounted] = useState(false);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     setMounted(true);
     const generateParticles = () => {
       const newParticles: Particle[] = [];
-      const count = 40; // Number of particles (similar to v3)
+      const count = 64;
 
       for (let i = 0; i < count; i++) {
         newParticles.push({
           id: i,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          size: Math.random() * 4 + 2, // 2‑6px size
+          size: Math.random() * 6 + 3, // ~3–9px
           duration: Math.random() * 15 + 10,
           delay: Math.random() * 3,
         });
@@ -47,28 +48,41 @@ export default function ParticleBackground() {
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute rounded-full bg-primary"
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-            width: particle.size,
-            height: particle.size,
-          }}
-          animate={{
-            y: [0, -60, 0],
-            opacity: [0.3, 0.7, 0.3],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: particle.delay,
-          }}
-        />
-      ))}
+      {particles.map((particle) =>
+        reduce ? (
+          <div
+            key={particle.id}
+            className="absolute rounded-full bg-primary/75 shadow-[0_0_12px_color-mix(in_oklch,var(--color-primary)_35%,transparent)]"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              width: particle.size,
+              height: particle.size,
+            }}
+          />
+        ) : (
+          <motion.div
+            key={particle.id}
+            className="absolute rounded-full bg-primary shadow-[0_0_14px_color-mix(in_oklch,var(--color-primary)_45%,transparent)]"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              width: particle.size,
+              height: particle.size,
+            }}
+            animate={{
+              y: [0, -72, 0],
+              opacity: [0.52, 0.95, 0.52],
+            }}
+            transition={{
+              duration: particle.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: particle.delay,
+            }}
+          />
+        ),
+      )}
     </div>
   );
 }
